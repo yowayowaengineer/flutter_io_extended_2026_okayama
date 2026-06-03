@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,7 +40,8 @@ class StylusCanvas extends StatefulWidget {
   State<StylusCanvas> createState() => _StylusCanvasState();
 }
 
-class _StylusCanvasState extends State<StylusCanvas> {
+class _StylusCanvasState extends State<StylusCanvas>
+    with SingleTickerProviderStateMixin {
   final List<List<StrokePoint>> _strokes = [];
   List<StrokePoint> _currentStroke = [];
 
@@ -47,10 +49,40 @@ class _StylusCanvasState extends State<StylusCanvas> {
   double _lastOrientation = 0.0;
   double _lastTilt = 0.0;
 
-  bool _showLinkButton = false;
+  Timer? _linkTimer;
+  bool _isLinkMode = false;
+
+  late AnimationController _glowController;
+  late Animation<double> _glowAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _glowController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    )..addListener(() {
+        setState(() {});
+      });
+    _glowAnimation = Tween<double>(begin: 4.0, end: 16.0).animate(
+      CurvedAnimation(parent: _glowController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _linkTimer?.cancel();
+    _glowController.dispose();
+    super.dispose();
+  }
 
   void _onPointerDown(PointerEvent event) {
+    _linkTimer?.cancel();
+    if (_isLinkMode) {
+      _glowController.stop();
+    }
     setState(() {
+      _isLinkMode = false;
       _currentStroke = [_toStrokePoint(event)];
       _updateDebugInfo(event);
     });
@@ -69,10 +101,17 @@ class _StylusCanvasState extends State<StylusCanvas> {
         _strokes.add(List.from(_currentStroke));
       }
       _currentStroke = [];
-      if (_strokes.isNotEmpty) {
-        _showLinkButton = true;
-      }
     });
+
+    if (_strokes.isNotEmpty) {
+      _linkTimer?.cancel();
+      _linkTimer = Timer(const Duration(seconds: 5), () {
+        setState(() {
+          _isLinkMode = true;
+        });
+        _glowController.repeat(reverse: true);
+      });
+    }
   }
 
   StrokePoint _toStrokePoint(PointerEvent event) {
@@ -91,19 +130,25 @@ class _StylusCanvasState extends State<StylusCanvas> {
   }
 
   void _clearCanvas() {
+    _linkTimer?.cancel();
+    _glowController.stop();
     setState(() {
       _strokes.clear();
       _currentStroke = [];
-      _showLinkButton = false;
+      _isLinkMode = false;
     });
   }
 
   Future<void> _openCommunityLink() async {
-    // ★ここをコミュニティのURLに変えてください
-    final uri = Uri.parse('https://your-community-url.example.com');
+    final uri = Uri.parse('https://okayama-dot-flutter.connpass.com/event/393552/');
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
+    // リンクを開いた後、編集モードに戻る
+    _glowController.stop();
+    setState(() {
+      _isLinkMode = false;
+    });
   }
 
   @override
@@ -137,37 +182,32 @@ class _StylusCanvasState extends State<StylusCanvas> {
           ),
           // キャンバス
           Expanded(
-            child: Listener(
-              onPointerDown: _onPointerDown,
-              onPointerMove: _onPointerMove,
-              onPointerUp: _onPointerUp,
-              child: CustomPaint(
-                size: Size.infinite,
-                foregroundPainter: StrokePainter(
-                  strokes: List.from(_strokes),
-                  currentStroke: List.from(_currentStroke),
-                ),
-                child: Container(
-                  color: Colors.white,
+            child: MouseRegion(
+              cursor: _isLinkMode
+                  ? SystemMouseCursors.click
+                  : SystemMouseCursors.basic,
+              child: Listener(
+                onPointerDown: _isLinkMode ? null : _onPointerDown,
+                onPointerMove: _isLinkMode ? null : _onPointerMove,
+                onPointerUp: _isLinkMode ? null : _onPointerUp,
+                child: GestureDetector(
+                  onTap: _isLinkMode ? _openCommunityLink : null,
+                  child: CustomPaint(
+                    size: Size.infinite,
+                    foregroundPainter: StrokePainter(
+                      strokes: List.from(_strokes),
+                      currentStroke: List.from(_currentStroke),
+                      isLinkMode: _isLinkMode,
+                      glowRadius: _glowAnimation.value,
+                    ),
+                    child: Container(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-          // コミュニティリンクボタン（1ストローク書いた後に表示）
-          if (_showLinkButton)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              child: ElevatedButton.icon(
-                onPressed: _openCommunityLink,
-                icon: const Icon(Icons.open_in_new),
-                label: const Text('コミュニティへGO！'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  textStyle: const TextStyle(fontSize: 18),
-                ),
-              ),
-            ),
         ],
       ),
     );
@@ -202,8 +242,15 @@ class _DebugLabel extends StatelessWidget {
 class StrokePainter extends CustomPainter {
   final List<List<StrokePoint>> strokes;
   final List<StrokePoint> currentStroke;
+  final bool isLinkMode;
+  final double glowRadius;
 
-  StrokePainter({required this.strokes, required this.currentStroke});
+  StrokePainter({
+    required this.strokes,
+    required this.currentStroke,
+    required this.isLinkMode,
+    required this.glowRadius,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -219,17 +266,37 @@ class StrokePainter extends CustomPainter {
       final p1 = stroke[i];
       final p2 = stroke[i + 1];
 
-      // 筆圧に応じて太さを変える（1.0〜8.0px）
       final strokeWidth = p1.pressure > 0 ? 1.0 + p1.pressure * 7.0 : 4.0;
 
-      final paint = Paint()
-        ..color = Colors.black
-        ..strokeWidth = strokeWidth
-        ..strokeCap = StrokeCap.round
-        ..strokeJoin = StrokeJoin.round
-        ..style = PaintingStyle.stroke;
+      if (isLinkMode) {
+        // グロー層
+        final glowPaint = Paint()
+          ..color = Colors.cyanAccent.withOpacity(0.6)
+          ..strokeWidth = strokeWidth + glowRadius
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..style = PaintingStyle.stroke
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, glowRadius);
+        canvas.drawLine(p1.position, p2.position, glowPaint);
 
-      canvas.drawLine(p1.position, p2.position, paint);
+        // 線本体
+        final linePaint = Paint()
+          ..color = Colors.lightBlueAccent
+          ..strokeWidth = strokeWidth
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..style = PaintingStyle.stroke;
+        canvas.drawLine(p1.position, p2.position, linePaint);
+      } else {
+        // 通常描画
+        final paint = Paint()
+          ..color = Colors.black
+          ..strokeWidth = strokeWidth
+          ..strokeCap = StrokeCap.round
+          ..strokeJoin = StrokeJoin.round
+          ..style = PaintingStyle.stroke;
+        canvas.drawLine(p1.position, p2.position, paint);
+      }
     }
   }
 
