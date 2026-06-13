@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/gestures.dart' show PointerDeviceKind;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -45,9 +46,8 @@ class _StylusCanvasState extends State<StylusCanvas>
   final List<List<StrokePoint>> _strokes = [];
   List<StrokePoint> _currentStroke = [];
 
-  double _lastPressure = 0.0;
-  double _lastOrientation = 0.0;
-  double _lastTilt = 0.0;
+  double _lastRawPressure = 0.0;
+  String _lastKind = '-';
 
   Timer? _linkTimer;
   bool _isLinkMode = false;
@@ -76,7 +76,14 @@ class _StylusCanvasState extends State<StylusCanvas>
     super.dispose();
   }
 
+  bool _isDrawingDevice(PointerEvent event) {
+    return event.kind == PointerDeviceKind.stylus ||
+        event.kind == PointerDeviceKind.invertedStylus ||
+        event.kind == PointerDeviceKind.mouse;
+  }
+
   void _onPointerDown(PointerEvent event) {
+    if (!_isDrawingDevice(event)) return;
     _linkTimer?.cancel();
     if (_isLinkMode) {
       _glowController.stop();
@@ -89,6 +96,7 @@ class _StylusCanvasState extends State<StylusCanvas>
   }
 
   void _onPointerMove(PointerEvent event) {
+    if (!_isDrawingDevice(event)) return;
     setState(() {
       _currentStroke.add(_toStrokePoint(event));
       _updateDebugInfo(event);
@@ -96,6 +104,7 @@ class _StylusCanvasState extends State<StylusCanvas>
   }
 
   void _onPointerUp(PointerEvent event) {
+    if (!_isDrawingDevice(event)) return;
     setState(() {
       if (_currentStroke.isNotEmpty) {
         _strokes.add(List.from(_currentStroke));
@@ -114,19 +123,26 @@ class _StylusCanvasState extends State<StylusCanvas>
     }
   }
 
+  // Flutter on Windows reports pressureMax=2.0 for this device, which is wrong.
+  // The actual range is 0–1024 (standard Wacom pressure levels).
+  static const _kPressureMax = 1024.0;
+
+  double _normalizePressure(PointerEvent event) {
+    return (event.pressure / _kPressureMax).clamp(0.0, 1.0);
+  }
+
   StrokePoint _toStrokePoint(PointerEvent event) {
     return StrokePoint(
       position: event.localPosition,
-      pressure: event.pressure,
+      pressure: _normalizePressure(event),
       orientation: event.orientation,
       tilt: event.tilt,
     );
   }
 
   void _updateDebugInfo(PointerEvent event) {
-    _lastPressure = event.pressure;
-    _lastOrientation = event.orientation;
-    _lastTilt = event.tilt;
+    _lastRawPressure = event.pressure;
+    _lastKind = event.kind.name;
   }
 
   void _clearCanvas() {
@@ -174,9 +190,8 @@ class _StylusCanvasState extends State<StylusCanvas>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _DebugLabel('筆圧', _lastPressure.toStringAsFixed(3)),
-                _DebugLabel('向き', '${(_lastOrientation * 180 / 3.14159).toStringAsFixed(1)}°'),
-                _DebugLabel('傾き', '${(_lastTilt * 180 / 3.14159).toStringAsFixed(1)}°'),
+                _DebugLabel('種別', _lastKind),
+                _DebugLabel('筆圧', _lastRawPressure.toStringAsFixed(3)),
               ],
             ),
           ),
@@ -266,12 +281,12 @@ class StrokePainter extends CustomPainter {
       final p1 = stroke[i];
       final p2 = stroke[i + 1];
 
-      final strokeWidth = p1.pressure > 0 ? 1.0 + p1.pressure * 7.0 : 4.0;
+      final strokeWidth = 2.0 + p1.pressure * 18.0;
 
       if (isLinkMode) {
         // グロー層
         final glowPaint = Paint()
-          ..color = Colors.cyanAccent.withOpacity(0.6)
+          ..color = Colors.cyanAccent.withValues(alpha: 0.6)
           ..strokeWidth = strokeWidth + glowRadius
           ..strokeCap = StrokeCap.round
           ..strokeJoin = StrokeJoin.round
