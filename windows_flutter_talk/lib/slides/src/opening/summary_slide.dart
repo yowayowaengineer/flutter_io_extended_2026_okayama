@@ -32,6 +32,7 @@ class _SummaryContentState extends State<_SummaryContent> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => setState(() => _stamped = true),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(96, 8, 96, 16),
