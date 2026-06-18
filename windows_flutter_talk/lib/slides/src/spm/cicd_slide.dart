@@ -5,7 +5,10 @@ import 'package:windows_flutter_talk/theme/app_colors.dart';
 class CicdSlide extends FlutterDeckSlideWidget {
   const CicdSlide()
       : super(
-          configuration: const FlutterDeckSlideConfiguration(route: '/cicd'),
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/cicd',
+            header: FlutterDeckHeaderConfiguration(title: '🔄 CI/CDで解決'),
+          ),
         );
 
   @override

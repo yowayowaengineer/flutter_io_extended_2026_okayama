@@ -7,6 +7,7 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/spm-default',
+            header: FlutterDeckHeaderConfiguration(title: '📦 SPMがデフォルトに'),
           ),
         );
 

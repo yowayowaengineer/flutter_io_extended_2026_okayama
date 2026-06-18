@@ -7,6 +7,7 @@ class WindowsPerspectiveSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/windows-perspective',
+            header: FlutterDeckHeaderConfiguration(title: '🪟 Windows開発者の視点'),
           ),
         );
 

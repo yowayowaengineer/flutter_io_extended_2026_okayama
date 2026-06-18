@@ -5,7 +5,10 @@ import 'package:windows_flutter_talk/theme/app_colors.dart';
 class DemoSlide extends FlutterDeckSlideWidget {
   const DemoSlide()
       : super(
-          configuration: const FlutterDeckSlideConfiguration(route: '/demo'),
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/demo',
+            header: FlutterDeckHeaderConfiguration(title: '🎮 デモ'),
+          ),
         );
 
   @override

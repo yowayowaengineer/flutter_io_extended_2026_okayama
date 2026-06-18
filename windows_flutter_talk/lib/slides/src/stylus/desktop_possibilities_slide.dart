@@ -7,6 +7,7 @@ class DesktopPossibilitiesSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/desktop-possibilities',
+            header: FlutterDeckHeaderConfiguration(title: '🖥️ デスクトップの可能性'),
           ),
         );
 

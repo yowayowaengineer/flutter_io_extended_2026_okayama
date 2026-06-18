@@ -7,6 +7,7 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/stylus-support',
+            header: FlutterDeckHeaderConfiguration(title: '✏️ Windowsスタイラスサポート'),
           ),
         );
 

@@ -7,6 +7,7 @@ class ComparisonSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/comparison',
+            header: FlutterDeckHeaderConfiguration(title: '⚖️ CocoaPods vs SPM'),
           ),
         );
 

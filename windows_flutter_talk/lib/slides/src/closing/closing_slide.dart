@@ -5,7 +5,10 @@ import 'package:windows_flutter_talk/theme/app_colors.dart';
 class ClosingSlide extends FlutterDeckSlideWidget {
   const ClosingSlide()
       : super(
-          configuration: const FlutterDeckSlideConfiguration(route: '/closing'),
+          configuration: const FlutterDeckSlideConfiguration(
+            route: '/closing',
+            header: FlutterDeckHeaderConfiguration(title: '👏 クロージング'),
+          ),
         );
 
   @override

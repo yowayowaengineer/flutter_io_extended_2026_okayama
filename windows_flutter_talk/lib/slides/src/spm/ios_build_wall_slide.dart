@@ -7,6 +7,7 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/ios-build-wall',
+            header: FlutterDeckHeaderConfiguration(title: '😱 iOSビルドの壁'),
           ),
         );
 

@@ -8,7 +8,7 @@ class ReferencesSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/references',
-            header: FlutterDeckHeaderConfiguration(title: '参考資料'),
+            header: FlutterDeckHeaderConfiguration(title: '📚 参考資料'),
           ),
         );
 
