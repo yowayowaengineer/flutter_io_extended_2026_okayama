@@ -22,7 +22,7 @@ class _SummaryContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 32),
+      padding: const EdgeInsets.symmetric(horizontal: 96, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,25 +30,25 @@ class _SummaryContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              const Text(
-                'Flutter 3.44、',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
               Text(
-                '盛りだくさんすぎる',
+                'Flutter ',
                 style: TextStyle(
-                  fontSize: 32,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: AppColors.blue,
                 ),
               ),
+              const Text(
+                '@ Google I/O 2026',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
 
           Expanded(
             child: Column(
@@ -57,45 +57,52 @@ class _SummaryContent extends StatelessWidget {
               children: [
                 // ── 45%: AI (大) ──────────────────────────────
                 _Section(
-                  headingSize: 24,
-                  bodySize: 14,
+                  headingSize: 19,
+                  bodySize: 13,
                   color: Colors.white,
                   heading: '🤖 1. AIと開発ワークフローの融合 (Agentic Workflows)',
                   body:
-                      'Agentic Hot Reload: CursorなどのAIコーディングエージェントが、Dart/FlutterのMCP（Model Context Protocol）サーバーを介して実行中のアプリに自動接続。AIがコードを修正すると、エンジニアが手を動かさずとも自動でホットリロードが走り、結果が手元で確認できるようになりました。\n'
-                      'GenUI SDK & A2UI Protocol: AIの返答をテキスト（Markdown）ではなく、実際のFlutterのウィジェットとして動的に組み立ててアプリ内にレンダリングするプロトコルが発表されました。',
+                      'Agentic Hot Reload (エージェント指向ホットリロード):\n'
+                      'CursorなどのAIコーディングエージェントが、Dart/FlutterのMCP（Model Context Protocol）サーバーを介して実行中のアプリに自動接続。\n'
+                      'AIがコードを修正すると、エンジニアが手を動かさずとも自動でホットリロードが走り、結果が手元で確認できるようになりました。\n'
+                      'GenUI SDK & A2UI Protocol:\n'
+                      'AIの返答をテキスト（Markdown）ではなく、実際のFlutterのウィジェットとして動的に組み立ててアプリ内にレンダリングするプロトコルが発表されました。',
                 ),
 
-                // ── 25%: Platform (中) ────────────────────────
+                // ── 20%: Decoupling (中) ──────────────────────
                 _Section(
-                  headingSize: 21,
+                  headingSize: 16,
                   bodySize: 12,
-                  color: Colors.white70,
+                  color: Colors.white,
                   heading: '📱 2. コアフレームワークの大分離（The Great Decoupling）',
                   body:
-                      'Material / Cupertino のパッケージ化: これまでFlutter本体と密結合していたMaterialとCupertinoのUIライブラリが、コアリポジトリから凍結・分離され、pub.dev上の独立したパッケージ（material_ui / cupertino_ui）へ移行が始まります。',
+                      'Material / Cupertino のパッケージ化: これまでFlutter本体と密結合していたMaterialとCupertinoのUIライブラリが、コアリポジトリから凍結・分離され、\n'
+                      'pub.dev上の独立したパッケージ（material_ui / cupertino_ui）へ移行が始まります。\n'
+                      'これにより、独自のデザインシステムを持つチームは、不要なUIコードを抱えずに「純粋な描画キャンバス」としてFlutterを利用できるようになります。',
                 ),
 
-                // ── 20%: Decoupling (小) ──────────────────────
+                // ── 25%: Platform (小) ────────────────────────
                 _Section(
-                  headingSize: 18,
+                  headingSize: 14,
                   bodySize: 11,
-                  color: Colors.white54,
+                  color: Colors.white,
                   heading: '🔧 3. プラットフォームとパフォーマンスの成熟',
                   body:
-                      'iOS/macOS: Swift Package Manager (SPM) がデフォルトに。CocoaPodsの呪縛から脱却し、CLIによる自動マイグレーションに対応。'
-                      'Android: Hybrid Composition++ (HCPP) & Pure Impeller。Android 10以上でImpeller（Vulkan）が完全デフォルト化され、Skiaが削除。',
+                      'iOS/macOS: Swift Package Manager (SPM) がデフォルトに。CocoaPodsの呪縛から脱却し、CLIによる自動マイグレーションに対応。\n'
+                      'Windows環境からGitHub Actions等を用いたiOSビルドの安定性が劇的に向上します。\n'
+                      'Android: Hybrid Composition++ (HCPP) & Pure Impeller。Android 10以上でImpeller（Vulkan）が完全デフォルト化され、Skiaが削除。\n'
+                      'さらにGoogle Mapsなどのネイティブビューを埋め込むPlatform Viewsの描画をOSの SurfaceControl に委ねる「HCPP」により、スクロールの引っかかりが根本から解消されました。',
                 ),
 
                 // ── 10%: Desktop (極小・オチ) ─────────────────
                 _Section(
-                  headingSize: 16,
+                  headingSize: 12,
                   bodySize: 10,
-                  color: Colors.white38,
+                  color: Colors.white,
                   heading: '🖥️ 4. デスクトップ & 組み込み（Embedded）の強化',
                   body:
-                      'Canonicalがデスクトップ全体のリードメンテナに。Ubuntuの開発元であるCanonicalが、LinuxだけでなくWindows、macOSを含むデスクトップ全体のロードマップとメンテナを引き受けました。'
-                      'Windowsスタイラスペンのネイティブサポート: コミュニティ（CodeDoctorDE氏）の多大な貢献により、Windowsの液タブやタブレットPCでの筆圧感知・回転の正確なトラッキングに対応。'
+                      'Canonicalがデスクトップ全体のリードメンテナに。Ubuntuの開発元であるCanonicalが、LinuxだけでなくWindows、macOSを含むデスクトップ全体のロードマップとメンテナを引き受けました。\n'
+                      'Windowsスタイラスペンのネイティブサポート: コミュニティ（CodeDoctorDE氏）の多大な貢献により、Windowsの液タブやタブレットPCでの筆圧感知・回転の正確なトラッキングに対応。\n'
                       '広がるエコシステム: 2026年型トヨタRAV4のインフォテインメントシステムへのFlutter採用や、LGのwebOS（スマートTV向け）公式SDKのプレビューなどが実機デモとともに紹介されました。',
                 ),
               ],
@@ -122,6 +129,48 @@ class _Section extends StatelessWidget {
   final String heading;
   final String body;
 
+  // Lines ending with ":" become bold (standalone subheadings).
+  // Lines starting with "Label: description" get a bold label prefix.
+  List<InlineSpan> _parseBodySpans() {
+    final lines = body.split('\n');
+    final spans = <InlineSpan>[];
+    final inlineLabelRegex = RegExp(r'^([^:]+:)\s(.+)$');
+
+    for (int i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      final suffix = i < lines.length - 1 ? '\n' : '';
+
+      if (line.trim().isEmpty) {
+        spans.add(TextSpan(text: suffix));
+        continue;
+      }
+
+      if (line.trimRight().endsWith(':')) {
+        spans.add(TextSpan(
+          text: '$line$suffix',
+          style: TextStyle(fontWeight: FontWeight.bold, color: color),
+        ));
+        continue;
+      }
+
+      final match = inlineLabelRegex.firstMatch(line);
+      if (match != null) {
+        spans.add(TextSpan(children: [
+          TextSpan(
+            text: match.group(1)!,
+            style: TextStyle(fontWeight: FontWeight.bold, color: color),
+          ),
+          TextSpan(text: '\n${match.group(2)!}$suffix'),
+        ]));
+        continue;
+      }
+
+      spans.add(TextSpan(text: '$line$suffix'));
+    }
+
+    return spans;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -136,12 +185,14 @@ class _Section extends StatelessWidget {
             height: 1.4,
           ),
         ),
-        Text(
-          body,
-          style: TextStyle(
-            fontSize: bodySize,
-            color: color.withValues(alpha: 0.75),
-            height: 1.5,
+        RichText(
+          text: TextSpan(
+            style: TextStyle(
+              fontSize: bodySize,
+              color: color.withValues(alpha: 0.75),
+              height: 1.5,
+            ),
+            children: _parseBodySpans(),
           ),
         ),
       ],

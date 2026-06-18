@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-import 'package:windows_flutter_talk/theme/app_colors.dart';
 
 class WhoAmISlide extends FlutterDeckSlideWidget {
   const WhoAmISlide({super.key})
@@ -118,23 +117,11 @@ class WhoAmISlide extends FlutterDeckSlideWidget {
         onTap: showTutorial,
         child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF0D1117), Color(0xFF1A2332)],
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                'タップして自己紹介',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: AppColors.blue.withValues(alpha: 0.5),
-                ),
-              ),
+            Image.asset(
+              'assets/images/FlutterKaigi2025.webp',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
             ),
             Positioned(
               left: 967.w,

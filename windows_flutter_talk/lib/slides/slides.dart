@@ -11,6 +11,7 @@ import 'package:windows_flutter_talk/slides/src/stylus/stylus_support_slide.dart
 import 'package:windows_flutter_talk/slides/src/stylus/desktop_possibilities_slide.dart';
 import 'package:windows_flutter_talk/slides/src/stylus/demo_slide.dart';
 import 'package:windows_flutter_talk/slides/src/closing/closing_slide.dart';
+import 'package:windows_flutter_talk/slides/src/closing/references_slide.dart';
 
 List<FlutterDeckSlideWidget> get slides => [
   // オープニング
@@ -32,4 +33,5 @@ List<FlutterDeckSlideWidget> get slides => [
 
   // クロージング
   const ClosingSlide(),
+  const ReferencesSlide(),
 ];
