@@ -19,7 +19,7 @@ class TitleSlide extends FlutterDeckSlideWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: const TextStyle(
-                  fontSize: 64,
+                  fontSize: 56,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   height: 1.3,
@@ -36,9 +36,9 @@ class TitleSlide extends FlutterDeckSlideWidget {
             ),
             const SizedBox(height: 24),
             const Text(
-              'Flutter 3.44の新機能はWindows勢にこそ「いいぞ！」',
+              'Flutter 3.44の新機能はいいぞ！',
               style: TextStyle(
-                fontSize: 28,
+                fontSize: 40,
                 color: Colors.white70,
               ),
             ),

@@ -46,7 +46,7 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
                       ),
                       children: [
                         const TextSpan(
-                          text: '革命：',
+                          text: 'Windows、',
                           style: TextStyle(color: Colors.white),
                         ),
                         TextSpan(

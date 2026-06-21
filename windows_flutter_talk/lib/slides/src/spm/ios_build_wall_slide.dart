@@ -18,7 +18,6 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
         padding: const EdgeInsets.fromLTRB(80, 48, 80, 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RichText(
               text: TextSpan(
@@ -37,20 +36,23 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
               ),
             ),
             const SizedBox(height: 32),
-            Row(
-              children: [
-                _WallCard(
-                  icon: Icons.cloud,
-                  title: 'GitHub Actions',
-                  body: 'サーバー上のmacOSでビルド。\n1回約20分、失敗したら最初からやり直し。',
-                ),
-                const SizedBox(width: 32),
-                _WallCard(
-                  icon: Icons.block,
-                  title: 'Ruby / CocoaPods',
-                  body: 'Ruby, Gemfile, pod install…\n複雑な依存チェーン。Windows環境では特にセットアップで詰まりやすい。',
-                ),
-              ],
+            Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: _WallCard(
+                    icon: Icons.cloud,
+                    title: 'GitHub Actions',
+                    body: 'サーバー上のmacOSでビルド。\n1回約20分、失敗したら最初からやり直し。',
+                  )),
+                  const SizedBox(width: 32),
+                  Expanded(child: _WallCard(
+                    icon: Icons.block,
+                    title: 'Ruby / CocoaPods',
+                    body: 'Ruby, Gemfile, pod install…\n複雑な依存チェーン。Windows環境では特にセットアップで詰まりやすい。',
+                  )),
+                ],
+              ),
             ),
           ],
         ),
@@ -72,8 +74,7 @@ class _WallCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: const Color(0xFF1A2332),
@@ -99,14 +100,13 @@ class _WallCard extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Text(
               body,
               style: const TextStyle(fontSize: 17, color: Colors.white70, height: 1.6),
             ),
           ],
         ),
-      ),
     );
   }
 }
