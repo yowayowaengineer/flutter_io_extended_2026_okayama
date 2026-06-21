@@ -15,7 +15,7 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 48, 80, 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +28,7 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
                   color: Colors.white,
                 ),
                 children: [
-                  const TextSpan(text: '地方エンジニアが直面する '),
+                  const TextSpan(text: 'Windowsエンジニアが直面する '),
                   TextSpan(
                     text: '「iOSビルドの壁」',
                     style: TextStyle(color: AppColors.blue),
@@ -36,19 +36,19 @@ class IosBuildWallSlide extends FlutterDeckSlideWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 56),
+            const SizedBox(height: 32),
             Row(
               children: [
                 _WallCard(
                   icon: Icons.cloud,
                   title: 'GitHub Actions',
-                  body: 'サーバー上のmacOSでビルド。\n環境構築がとにかく地獄。',
+                  body: 'サーバー上のmacOSでビルド。\n1回約20分、失敗したら最初からやり直し。',
                 ),
                 const SizedBox(width: 32),
                 _WallCard(
                   icon: Icons.block,
                   title: 'Ruby / CocoaPods',
-                  body: '環境差異による謎のビルドエラー。\nWindows勢には馴染みのないRubyの呪縛。',
+                  body: 'Ruby, Gemfile, pod install…\n複雑な依存チェーン。Windows環境では特にセットアップで詰まりやすい。',
                 ),
               ],
             ),
@@ -74,7 +74,7 @@ class _WallCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: const Color(0xFF1A2332),
           borderRadius: BorderRadius.circular(16),
@@ -90,7 +90,7 @@ class _WallCard extends StatelessWidget {
               ),
               child: Icon(icon, color: AppColors.blue, size: 32),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
@@ -102,7 +102,7 @@ class _WallCard extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               body,
-              style: const TextStyle(fontSize: 20, color: Colors.white70, height: 1.6),
+              style: const TextStyle(fontSize: 17, color: Colors.white70, height: 1.6),
             ),
           ],
         ),

@@ -26,23 +26,21 @@ class _ReferencesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(96, 80, 96, 48),
+      padding: const EdgeInsets.fromLTRB(96, 48, 96, 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _RefItem(
             label: '公式ブログ（I/O 2026 Flutter ラップアップ）',
             title: "That's a wrap: Everything Flutter at Google I/O 2026",
             url: 'https://blog.flutter.dev/thats-a-wrap-everything-flutter-at-google-i-o-2026-f316e57186e3',
           ),
-          const SizedBox(height: 40),
           _RefItem(
             label: '公式リリースノート',
             title: 'Flutter 3.44.0 release notes',
             url: 'https://docs.flutter.dev/release/release-notes/release-notes-3.44.0',
           ),
-          const SizedBox(height: 40),
           _RefItem(
             label: '技術解説記事（Dev.to）',
             title: 'Flutter 3.44 Highlights From Google I/O 2026: What\'s New and What Matters',

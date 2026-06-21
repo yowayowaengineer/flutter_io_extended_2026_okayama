@@ -69,7 +69,7 @@ class _Panel1 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('🪟', style: TextStyle(fontSize: 80)),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             const Text(
               'このPCは',
               style: TextStyle(fontSize: 32, color: Colors.white60),
@@ -94,7 +94,7 @@ class _Panel1 extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
             const Text(
               '登壇中も。',
               style: TextStyle(fontSize: 24, color: Colors.white38),
