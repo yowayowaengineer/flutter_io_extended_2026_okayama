@@ -15,7 +15,7 @@ class CicdSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 48, 80, 48),
         child: Row(
           children: [
             Expanded(
@@ -40,19 +40,19 @@ class CicdSlide extends FlutterDeckSlideWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 20),
                   const Text(
                     'GitHub Actionsのワークフローが激変します。',
-                    style: TextStyle(fontSize: 22, color: Colors.white70),
+                    style: TextStyle(fontSize: 20, color: Colors.white70),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
                   _CheckItem('setup-ruby 不要', 'ステップ削減'),
                   _CheckItem('pod install 不要', 'ビルド時間短縮'),
                   _CheckItem('キャッシュ安定', 'Xcode標準のキャッシュ'),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 20),
                   const Text(
                     'Windowsメインの開発者でも、iOSビルドの\nパイプライン維持が圧倒的に低コストに。',
-                    style: TextStyle(fontSize: 20, color: Colors.white54, height: 1.6),
+                    style: TextStyle(fontSize: 18, color: Colors.white54, height: 1.5),
                   ),
                 ],
               ),
@@ -60,7 +60,6 @@ class CicdSlide extends FlutterDeckSlideWidget {
             const SizedBox(width: 60),
             Expanded(
               child: Container(
-                height: 400,
                 decoration: BoxDecoration(
                   color: const Color(0xFF1A2332),
                   borderRadius: BorderRadius.circular(16),

@@ -15,7 +15,7 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 40, 80, 40),
         child: Row(
           children: [
             Expanded(
@@ -41,7 +41,7 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
                   RichText(
                     text: TextSpan(
                       style: const TextStyle(
-                        fontSize: 44,
+                        fontSize: 36,
                         fontWeight: FontWeight.bold,
                       ),
                       children: [
@@ -60,12 +60,12 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   const Text(
                     'CodeDoctorDE氏による驚異の貢献',
-                    style: TextStyle(fontSize: 20, color: Colors.white54),
+                    style: TextStyle(fontSize: 18, color: Colors.white54),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 20),
                   _Feature('筆圧感知 (Pressure)', '強弱をリアルに再現', AppColors.blue),
                   _Feature('回転 (Rotation)', 'ペンの傾きを正確に追跡', AppColors.blue),
                   _Feature('液タブ・Surfaceユーザーへの最高な回答', '', Colors.white70),

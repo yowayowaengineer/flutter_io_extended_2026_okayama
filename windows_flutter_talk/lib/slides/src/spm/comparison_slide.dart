@@ -15,14 +15,14 @@ class ComparisonSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 24, 80, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 children: [
                   const TextSpan(
                     text: '依存関係管理の ',
@@ -35,7 +35,7 @@ class ComparisonSlide extends FlutterDeckSlideWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 24),
             _ComparisonTable(),
           ],
         ),
@@ -68,7 +68,7 @@ class _TableHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.blue.withValues(alpha: 0.3),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
@@ -95,7 +95,7 @@ class _TableRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
       color: isEven ? Colors.white.withValues(alpha: 0.03) : Colors.transparent,
       child: Row(
         children: [

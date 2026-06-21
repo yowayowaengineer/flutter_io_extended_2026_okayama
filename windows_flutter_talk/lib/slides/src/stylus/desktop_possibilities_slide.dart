@@ -15,16 +15,17 @@ class DesktopPossibilitiesSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 40, 80, 40),
         child: Row(
           children: [
-            Column(
+            Expanded(
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RichText(
                   text: TextSpan(
-                    style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     children: [
                       const TextSpan(
                         text: 'デスクトップの ',
@@ -37,11 +38,11 @@ class DesktopPossibilitiesSlide extends FlutterDeckSlideWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 32),
                 Text(
                   '100%',
                   style: TextStyle(
-                    fontSize: 120,
+                    fontSize: 96,
                     fontWeight: FontWeight.bold,
                     color: AppColors.blue,
                   ),
@@ -55,6 +56,7 @@ class DesktopPossibilitiesSlide extends FlutterDeckSlideWidget {
                   ),
                 ),
               ],
+            ),
             ),
             const SizedBox(width: 80),
             Expanded(

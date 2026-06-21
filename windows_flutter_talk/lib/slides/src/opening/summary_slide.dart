@@ -193,7 +193,7 @@ class _Section extends StatelessWidget {
                 fontSize: headingSize,
                 fontWeight: FontWeight.bold,
                 color: color,
-                height: 1.4,
+                height: 1.2,
               ),
             ),
             RichText(
@@ -201,7 +201,7 @@ class _Section extends StatelessWidget {
                 style: TextStyle(
                   fontSize: bodySize,
                   color: color.withValues(alpha: 0.75),
-                  height: 1.5,
+                  height: 1.3,
                 ),
                 children: _parseBodySpans(),
               ),

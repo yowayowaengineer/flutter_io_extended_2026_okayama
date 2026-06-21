@@ -15,13 +15,13 @@ class DemoSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 24, 80, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 children: [
                   TextSpan(
                     text: 'Demo: ',
@@ -34,7 +34,7 @@ class DemoSlide extends FlutterDeckSlideWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 24),
             Row(
               children: [
                 _DemoStep(
@@ -78,7 +78,7 @@ class _DemoStep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: const Color(0xFF1A2332),
           borderRadius: BorderRadius.circular(16),
@@ -87,26 +87,26 @@ class _DemoStep extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: AppColors.blue.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: AppColors.blue, size: 32),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             Text(
               step,
               style: const TextStyle(
-                fontSize: 26,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             Text(
               body,
-              style: const TextStyle(fontSize: 20, color: Colors.white60, height: 1.6),
+              style: const TextStyle(fontSize: 18, color: Colors.white60, height: 1.5),
             ),
           ],
         ),

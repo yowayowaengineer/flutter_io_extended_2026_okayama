@@ -25,7 +25,7 @@ class _MultiwindowContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(96, 40, 96, 40),
+      padding: const EdgeInsets.fromLTRB(96, 12, 96, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +34,7 @@ class _MultiwindowContent extends StatelessWidget {
             flex: 3,
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: AppColors.blue.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(16),
@@ -93,7 +93,7 @@ class _MultiwindowContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: const Color(0xFF2A1A1A),
                       borderRadius: BorderRadius.circular(16),
@@ -126,7 +126,7 @@ class _MultiwindowContent extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: const Color(0xFF1A2332),
                       borderRadius: BorderRadius.circular(16),

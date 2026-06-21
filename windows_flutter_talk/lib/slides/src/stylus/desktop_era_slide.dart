@@ -32,26 +32,26 @@ class _DesktopEraContent extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
               children: [
                 const TextSpan(text: 'これまで冷遇気味だったデスクトップが、'),
                 TextSpan(text: 'Flutter 3.44で大きく動きました。', style: TextStyle(color: AppColors.blue)),
               ],
             ),
           ),
-          const SizedBox(height: 48),
+          const SizedBox(height: 24),
           _Item(
             icon: Icons.engineering,
             title: 'Canonicalがリードメンテナに就任',
             body: 'Windows / macOS / Linux 全体のロードマップとメンテナンスを引き受けました。',
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 20),
           _Item(
             icon: Icons.window,
             title: 'ネイティブ・マルチウィンドウ対応',
             body: 'エンジンレベルでのアーキテクチャ刷新。次のスライドで詳しく説明します。',
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 20),
           _Item(
             icon: Icons.edit,
             title: 'Windowsスタイラスのネイティブサポート',

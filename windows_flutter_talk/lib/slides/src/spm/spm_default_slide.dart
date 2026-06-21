@@ -15,7 +15,7 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
       builder: (context) => Padding(
-        padding: const EdgeInsets.all(80),
+        padding: const EdgeInsets.fromLTRB(80, 48, 80, 48),
         child: Row(
           children: [
             Expanded(
@@ -57,7 +57,6 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
             const SizedBox(width: 60),
             Expanded(
               child: Container(
-                height: 400,
                 decoration: BoxDecoration(
                   color: const Color(0xFF1A2332),
                   borderRadius: BorderRadius.circular(16),
