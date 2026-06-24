@@ -1,6 +1,7 @@
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:windows_flutter_talk/slides/src/opening/title_slide.dart';
 import 'package:windows_flutter_talk/slides/src/me/who_am_i_slide.dart';
+import 'package:windows_flutter_talk/slides/src/me/who_am_i_2_slide.dart';
 import 'package:windows_flutter_talk/slides/src/opening/summary_slide.dart';
 import 'package:windows_flutter_talk/slides/src/opening/windows_perspective_slide.dart';
 import 'package:windows_flutter_talk/slides/src/spm/ios_build_wall_slide.dart';
@@ -22,6 +23,7 @@ List<FlutterDeckSlideWidget> get slides => [
   const WhoAmISlide(),
   const SummarySlide(),
   const WindowsPerspectiveSlide(),
+  const WhoAmI2Slide(),
 
   // SPM
   const IosBuildWallSlide(),
