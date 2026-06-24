@@ -5,12 +5,12 @@ import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class WhoAmISlide extends FlutterDeckSlideWidget {
   const WhoAmISlide({super.key})
-      : super(
-          configuration: const FlutterDeckSlideConfiguration(
-            route: '/who-am-i',
-            header: FlutterDeckHeaderConfiguration(title: '👋 よわよわエンジニア is 誰'),
-          ),
-        );
+    : super(
+        configuration: const FlutterDeckSlideConfiguration(
+          route: '/who-am-i',
+          header: FlutterDeckHeaderConfiguration(title: '👋 よわよわエンジニア is 誰'),
+        ),
+      );
 
   @override
   FlutterDeckSlide build(BuildContext context) {
@@ -69,7 +69,7 @@ class WhoAmISlide extends FlutterDeckSlideWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              '🍩☕  岡山.Flutter 主宰',
+                              '🍩☕  岡山.Flutter の中の人',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[700],
@@ -78,7 +78,10 @@ class WhoAmISlide extends FlutterDeckSlideWidget {
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                const Text('🐦', style: TextStyle(fontSize: 16)),
+                                const Text(
+                                  '🐦',
+                                  style: TextStyle(fontSize: 16),
+                                ),
                                 const SizedBox(width: 4),
                                 Text(
                                   '@yowayowa_engr',
@@ -126,11 +129,7 @@ class WhoAmISlide extends FlutterDeckSlideWidget {
             Positioned(
               left: 967.w,
               top: 528.h,
-              child: SizedBox(
-                key: targetKey,
-                width: 40.w,
-                height: 40.h,
-              ),
+              child: SizedBox(key: targetKey, width: 40.w, height: 40.h),
             ),
           ],
         ),

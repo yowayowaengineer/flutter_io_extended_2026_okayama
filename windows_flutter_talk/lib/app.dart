@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_deck/flutter_deck.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,12 +96,8 @@ class _AnimatedFooterWidget extends StatefulWidget {
 
 class _AnimatedFooterWidgetState extends State<_AnimatedFooterWidget>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _isMovingRight = false;
-  int _imageIndex = 0;
-  bool _animationStarted = false;
-
+  static DateTime? _startTime;
+  static const _totalDuration = Duration(minutes: 30);
   static const _idleImagePath = 'assets/images/player-idle.png';
 
   final List<String> _imagePaths = [
@@ -108,47 +105,35 @@ class _AnimatedFooterWidgetState extends State<_AnimatedFooterWidget>
     'assets/images/player-walk-right.gif',
   ];
 
+  late Ticker _ticker;
+  double _t = 0.0;
+
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(minutes: 20),
-      vsync: this,
-    );
-
-    _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
-
-    _controller.addListener(() {
-      final previousDirection = _isMovingRight;
-      _isMovingRight = _animation.value >= 0.5;
-
-      if (previousDirection != _isMovingRight && mounted) {
-        setState(() {
-          _imageIndex = (_imageIndex + 1) % _imagePaths.length;
-        });
-      }
-    });
+    _ticker = createTicker((_) {
+      if (_startTime == null || !mounted) return;
+      final elapsedMs =
+          DateTime.now().difference(_startTime!).inMilliseconds %
+          _totalDuration.inMilliseconds;
+      setState(() => _t = elapsedMs / _totalDuration.inMilliseconds);
+    })..start();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (!_animationStarted && mounted) {
+    if (_startTime == null) {
       final slideIndex = context.flutterDeck.router.currentSlideIndex;
       if (slideIndex >= 1) {
-        _animationStarted = true;
-        _controller.repeat();
-        setState(() {});
+        _startTime = DateTime.now();
       }
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _ticker.dispose();
     super.dispose();
   }
 
@@ -162,6 +147,31 @@ class _AnimatedFooterWidgetState extends State<_AnimatedFooterWidget>
     const logoPosition = logoWidth;
     const rightMargin = 100.0;
     final rightEndPosition = screenWidth - rightMargin;
+
+    final bool started = _startTime != null;
+
+    double position;
+    String imagePath;
+
+    if (started) {
+      if (_t <= 0.5) {
+        final progress = _t * 2.0;
+        position =
+            rightEndPosition -
+            (rightEndPosition - logoPosition + imageSize) * progress;
+        imagePath = _imagePaths[0];
+      } else {
+        final progress = (_t - 0.5) * 2.0;
+        position =
+            logoPosition -
+            imageSize +
+            (rightEndPosition - logoPosition + imageSize) * progress;
+        imagePath = _imagePaths[1];
+      }
+    } else {
+      position = rightEndPosition;
+      imagePath = _idleImagePath;
+    }
 
     return UnconstrainedBox(
       constrainedAxis: Axis.horizontal,
@@ -179,53 +189,25 @@ class _AnimatedFooterWidgetState extends State<_AnimatedFooterWidget>
                 fit: BoxFit.contain,
               ),
             ),
-            AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                double position;
-                if (_animationStarted) {
-                  if (_animation.value <= 0.5) {
-                    final progress = _animation.value * 2.0;
-                    position =
-                        rightEndPosition -
-                        (rightEndPosition - logoPosition + imageSize) *
-                            progress;
-                  } else {
-                    final progress = (_animation.value - 0.5) * 2.0;
-                    position =
-                        logoPosition -
-                        imageSize +
-                        (rightEndPosition - logoPosition + imageSize) *
-                            progress;
-                  }
-                } else {
-                  position = rightEndPosition;
-                }
-
-                final imagePath =
-                    _animationStarted ? _imagePaths[_imageIndex] : _idleImagePath;
-
-                return Positioned(
-                  left: position,
-                  top: footerTop - (screenHeight * 0.9),
-                  child: Image.asset(
-                    imagePath,
+            Positioned(
+              left: position,
+              top: footerTop - (screenHeight * 0.9),
+              child: Image.asset(
+                imagePath,
+                width: imageSize,
+                height: imageSize,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return SizedBox(
                     width: imageSize,
                     height: imageSize,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return SizedBox(
-                        width: imageSize,
-                        height: imageSize,
-                        child: Container(
-                          color: Colors.grey.withValues(alpha: 0.3),
-                          child: const Icon(Icons.image, size: 20),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
+                    child: Container(
+                      color: Colors.grey.withValues(alpha: 0.3),
+                      child: const Icon(Icons.image, size: 20),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
