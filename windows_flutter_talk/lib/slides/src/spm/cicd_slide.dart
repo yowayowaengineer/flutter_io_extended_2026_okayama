@@ -59,13 +59,24 @@ class CicdSlide extends FlutterDeckSlideWidget {
             ),
             const SizedBox(width: 60),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1A2332),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Center(
-                  child: Icon(Icons.check_circle_outline, size: 120, color: AppColors.blue),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.asset(
+                      'assets/images/build_time.png',
+                      fit: BoxFit.cover,
+                    ),
+                    Container(color: Colors.black.withValues(alpha: 0.5)),
+                    Center(
+                      child: Icon(
+                        Icons.check_circle_outline,
+                        size: 120,
+                        color: AppColors.blue,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

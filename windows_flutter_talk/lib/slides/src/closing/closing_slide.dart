@@ -7,7 +7,7 @@ class ClosingSlide extends FlutterDeckSlideWidget {
       : super(
           configuration: const FlutterDeckSlideConfiguration(
             route: '/closing',
-            header: FlutterDeckHeaderConfiguration(title: '👏 クロージング'),
+            header: FlutterDeckHeaderConfiguration(title: '🖊️ デモ'),
           ),
         );
 
@@ -18,43 +18,63 @@ class ClosingSlide extends FlutterDeckSlideWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Windowsから、',
-              style: TextStyle(
-                fontSize: 72,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
             RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(
-                style: const TextStyle(fontSize: 72, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 64,
+                  fontWeight: FontWeight.bold,
+                  height: 1.3,
+                ),
                 children: [
+                  const TextSpan(
+                    text: 'それでは、',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   TextSpan(
-                    text: '世界',
+                    text: 'デモ',
                     style: TextStyle(color: AppColors.blue),
                   ),
                   const TextSpan(
-                    text: 'を変えよう。',
+                    text: 'をご覧ください',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
-              'もう「Windowsだから」と諦める必要はありません。',
-              style: TextStyle(fontSize: 28, color: Colors.white60),
-            ),
-            const SizedBox(height: 60),
-            const Text(
-              'ご清聴ありがとうございました！',
-              style: TextStyle(fontSize: 32, color: Colors.white),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Questions & Discussion',
-              style: TextStyle(fontSize: 20, color: Colors.white38),
+            const SizedBox(height: 64),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.05),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white12),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('🍵', style: TextStyle(fontSize: 36)),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '少々お待ちください',
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '液タブを接続しています...',
+                        style: TextStyle(fontSize: 18, color: Colors.white38),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

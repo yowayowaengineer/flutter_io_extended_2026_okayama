@@ -9,9 +9,10 @@ import 'package:windows_flutter_talk/slides/src/spm/cicd_slide.dart';
 import 'package:windows_flutter_talk/slides/src/spm/comparison_slide.dart';
 import 'package:windows_flutter_talk/slides/src/stylus/desktop_era_slide.dart';
 import 'package:windows_flutter_talk/slides/src/stylus/multiwindow_slide.dart';
+import 'package:windows_flutter_talk/slides/src/stylus/stylus_backstory_slide.dart';
 import 'package:windows_flutter_talk/slides/src/stylus/stylus_support_slide.dart';
 import 'package:windows_flutter_talk/slides/src/stylus/desktop_possibilities_slide.dart';
-import 'package:windows_flutter_talk/slides/src/stylus/demo_slide.dart';
+import 'package:windows_flutter_talk/slides/src/stylus/flutter_desktop_advantage_slide.dart';
 import 'package:windows_flutter_talk/slides/src/closing/closing_slide.dart';
 import 'package:windows_flutter_talk/slides/src/closing/references_slide.dart';
 
@@ -32,8 +33,9 @@ List<FlutterDeckSlideWidget> get slides => [
   const DesktopEraSlide(),
   const MultiwindowSlide(),
   const StylusSupportSlide(),
+  const StylusBackstorySlide(),
   const DesktopPossibilitiesSlide(),
-  const DemoSlide(),
+  const FlutterDesktopAdvantageSlide(),
 
   // クロージング
   const ClosingSlide(),
