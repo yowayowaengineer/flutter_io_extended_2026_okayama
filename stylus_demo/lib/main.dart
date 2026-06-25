@@ -1,21 +1,68 @@
+// ignore_for_file: invalid_use_of_internal_member
+// ignore_for_file: implementation_imports
+
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/gestures.dart' show PointerDeviceKind;
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/_window.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runWidget(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class _MainWindowDelegate with RegularWindowControllerDelegate {
+  @override
+  void onWindowDestroyed() {
+    super.onWindowDestroyed();
+    exit(0);
+  }
+}
+
+class _CallbackRegularWindowDelegate with RegularWindowControllerDelegate {
+  _CallbackRegularWindowDelegate({required this.onDestroyed});
+  final VoidCallback onDestroyed;
+
+  @override
+  void onWindowDestroyed() {
+    onDestroyed();
+    super.onWindowDestroyed();
+  }
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final RegularWindowController _controller = RegularWindowController(
+    preferredSize: const Size(800, 600),
+    title: 'Flutter 3.44 Stylus Demo',
+    delegate: _MainWindowDelegate(),
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stylus Demo',
-      theme: ThemeData(colorSchemeSeed: Colors.blue),
-      home: const StylusCanvas(),
+    return RegularWindow(
+      controller: _controller,
+      child: WindowManager(
+        child: MaterialApp(
+          title: 'Stylus Demo',
+          theme: ThemeData(colorSchemeSeed: Colors.blue),
+          home: const StylusCanvas(),
+        ),
+      ),
     );
   }
 }
@@ -55,6 +102,10 @@ class _StylusCanvasState extends State<StylusCanvas>
   late AnimationController _glowController;
   late Animation<double> _glowAnimation;
 
+  WindowRegistry? _windowRegistry;
+  WindowEntry? _clearWindowEntry;
+  RegularWindowController? _clearWindowController;
+
   @override
   void initState() {
     super.initState();
@@ -70,9 +121,16 @@ class _StylusCanvasState extends State<StylusCanvas>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _windowRegistry = WindowRegistry.maybeOf(context);
+  }
+
+  @override
   void dispose() {
     _linkTimer?.cancel();
     _glowController.dispose();
+    _clearWindowController?.destroy();
     super.dispose();
   }
 
@@ -114,13 +172,54 @@ class _StylusCanvasState extends State<StylusCanvas>
 
     if (_strokes.isNotEmpty) {
       _linkTimer?.cancel();
-      _linkTimer = Timer(const Duration(seconds: 5), () {
-        setState(() {
-          _isLinkMode = true;
+
+      final isStylus = event.kind == PointerDeviceKind.stylus ||
+          event.kind == PointerDeviceKind.invertedStylus;
+
+      if (isStylus) {
+        _linkTimer = Timer(const Duration(seconds: 20), () {
+          setState(() {
+            _isLinkMode = true;
+          });
+          _glowController.repeat(reverse: true);
         });
-        _glowController.repeat(reverse: true);
-      });
+      } else {
+        _linkTimer = Timer(const Duration(seconds: 10), () {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) _openClearWindow();
+          });
+        });
+      }
     }
+  }
+
+  void _openClearWindow() {
+    if (_clearWindowEntry != null || _windowRegistry == null) return;
+
+    late final WindowEntry entry;
+    late final RegularWindowController controller;
+
+    controller = RegularWindowController(
+      preferredSize: const Size(320, 160),
+      title: 'キャンバスをリセット',
+      delegate: _CallbackRegularWindowDelegate(
+        onDestroyed: () {
+          _clearWindowEntry = null;
+          _clearWindowController = null;
+        },
+      ),
+    );
+
+    entry = WindowEntry(
+      controller: controller,
+      builder: (BuildContext context) => _ClearWindowContent(
+        onClear: _clearCanvas,
+      ),
+    );
+
+    _windowRegistry!.register(entry);
+    _clearWindowEntry = entry;
+    _clearWindowController = controller;
   }
 
   // Flutter on Windows reports pressureMax=2.0 for this device, which is wrong.
@@ -148,6 +247,10 @@ class _StylusCanvasState extends State<StylusCanvas>
   void _clearCanvas() {
     _linkTimer?.cancel();
     _glowController.stop();
+    final controller = _clearWindowController;
+    _clearWindowEntry = null;
+    _clearWindowController = null;
+    controller?.destroy();
     setState(() {
       _strokes.clear();
       _currentStroke = [];
@@ -224,6 +327,35 @@ class _StylusCanvasState extends State<StylusCanvas>
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ClearWindowContent extends StatelessWidget {
+  const _ClearWindowContent({required this.onClear});
+  final VoidCallback onClear;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(colorSchemeSeed: Colors.blue),
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('マウスで描画しました'),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.delete_outline),
+                label: const Text('キャンバスをクリア'),
+                onPressed: onClear,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
