@@ -76,6 +76,10 @@ class _AppState extends State<App> {
               )},
             ),
           ),
+          slideSize: FlutterDeckSlideSize.fromAspectRatio(
+            aspectRatio: const FlutterDeckAspectRatio.ratio16x9(),
+            resolution: const FlutterDeckResolution.fhd(),
+          ),
           transition: const FlutterDeckTransition.fade(),
           footer: const FlutterDeckFooterConfiguration(
             showSlideNumbers: true,

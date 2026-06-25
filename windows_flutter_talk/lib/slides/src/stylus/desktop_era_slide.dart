@@ -32,7 +32,7 @@ class _DesktopEraContent extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white),
               children: [
                 const TextSpan(text: 'これまで冷遇気味だったデスクトップが、'),
                 TextSpan(text: 'Flutter 3.44で大きく動きました。', style: TextStyle(color: AppColors.blue)),
@@ -98,7 +98,7 @@ class _Item extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: highlight ? 24 : 22,
+                  fontSize: highlight ? 28 : 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -106,7 +106,7 @@ class _Item extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 body,
-                style: const TextStyle(fontSize: 16, color: Colors.white60, height: 1.5),
+                style: const TextStyle(fontSize: 24, color: Colors.white60, height: 1.5),
               ),
             ],
           ),

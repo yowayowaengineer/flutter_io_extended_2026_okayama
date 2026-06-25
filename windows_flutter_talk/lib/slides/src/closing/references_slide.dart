@@ -71,7 +71,7 @@ class _RefItem extends StatelessWidget {
         Text(
           label,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 20,
             color: Colors.white,
             letterSpacing: 0.5,
           ),
@@ -82,7 +82,7 @@ class _RefItem extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
               color: AppColors.blue,
               decoration: TextDecoration.underline,

@@ -191,7 +191,7 @@ class _Panel3 extends StatelessWidget {
               const Text(
                 '🔧 3. プラットフォームとパフォーマンスの成熟',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -200,7 +200,7 @@ class _Panel3 extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 24,
                     height: 1.7,
                     color: Colors.white70,
                   ),
@@ -228,7 +228,7 @@ class _Panel3 extends StatelessWidget {
                   Text(
                     'これが今日の本題！',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: AppColors.blue,
                     ),

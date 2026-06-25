@@ -81,7 +81,7 @@ class _Content extends StatelessWidget {
                   child: Text(
                     'ただし「ペイントツール」「デザインアプリ」文脈で考えると、話が変わる',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 26,
                       color: Colors.white,
                       height: 1.4,
                     ),
@@ -117,7 +117,7 @@ class _DemandRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 18, color: Colors.white70),
+          style: const TextStyle(fontSize: 26, color: Colors.white70),
         ),
         const SizedBox(height: 8),
         Row(
@@ -145,7 +145,7 @@ class _DemandRow extends StatelessWidget {
               child: Text(
                 verdict,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: verdictColor,
                 ),

@@ -21,7 +21,7 @@ class StylusBackstorySlide extends FlutterDeckSlideWidget {
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 children: [
                   TextSpan(
                     text: 'なぜ Flutter 3.44 ',
@@ -71,7 +71,7 @@ class StylusBackstorySlide extends FlutterDeckSlideWidget {
                     title: '悲願達成',
                     body:
                         'Win32 ネイティブ API を正しくハンドリングし、\n筆圧・回転を完全サポート。\n\n'
-                        'PR #165323 が本家にマージ。\n数年越しの issue がついてに閉じる。',
+                        'PR #165323 が本家にマージ。\n数年越しの issue がついに閉じる。',
                     footnote: 'PR #165323',
                     footnoteColor: const Color(0xFF4CAF50),
                   ),
@@ -120,7 +120,7 @@ class _StoryCard extends StatelessWidget {
             Text(
               year,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 18,
                 color: iconColor,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
@@ -132,7 +132,7 @@ class _StoryCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 22,
+                fontSize: 26,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -142,7 +142,7 @@ class _StoryCard extends StatelessWidget {
               child: Text(
                 body,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 22,
                   color: Colors.white60,
                   height: 1.65,
                 ),
@@ -157,7 +157,7 @@ class _StoryCard extends StatelessWidget {
               child: Text(
                 footnote,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 18,
                   color: iconColor,
                   fontWeight: FontWeight.w600,
                 ),

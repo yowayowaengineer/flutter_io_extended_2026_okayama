@@ -23,7 +23,7 @@ class FlutterDesktopAdvantageSlide extends FlutterDeckSlideWidget {
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 children: [
                   const TextSpan(
                     text: 'ペイントツール・デザインツールで ',
@@ -125,12 +125,12 @@ class _Card extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(icon, style: const TextStyle(fontSize: 28)),
+                Text(icon, style: const TextStyle(fontSize: 32)),
                 const SizedBox(width: 12),
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 26,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: highlight ? AppColors.blue : Colors.white,
                   ),
@@ -159,7 +159,7 @@ class _RowWidget extends StatelessWidget {
         children: [
           Text(
             row.label,
-            style: const TextStyle(fontSize: 13, color: Colors.white38),
+            style: const TextStyle(fontSize: 18, color: Colors.white38),
           ),
           const SizedBox(height: 5),
           Row(
@@ -168,7 +168,7 @@ class _RowWidget extends StatelessWidget {
               Text(
                 row.ok ? '✓' : '✗',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: row.ok ? const Color(0xFF4CAF50) : Colors.red,
                 ),
@@ -178,7 +178,7 @@ class _RowWidget extends StatelessWidget {
                 child: Text(
                   row.value,
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 24,
                     color: row.ok ? Colors.white : Colors.white38,
                     fontWeight:
                         row.ok ? FontWeight.w600 : FontWeight.normal,

@@ -42,7 +42,7 @@ class StylusSupportSlide extends FlutterDeckSlideWidget {
             const SizedBox(height: 12),
             const Text(
               'CodeDoctorDE 氏による驚異の貢献',
-              style: TextStyle(fontSize: 20, color: Colors.white38),
+              style: TextStyle(fontSize: 26, color: Colors.white38),
             ),
             const SizedBox(height: 48),
             Row(
@@ -107,20 +107,20 @@ class _FeatureCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 26,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 14, color: Colors.white38),
+              style: const TextStyle(fontSize: 22, color: Colors.white38),
             ),
             const SizedBox(height: 12),
             Text(
               body,
               style: const TextStyle(
-                fontSize: 17,
+                fontSize: 24,
                 color: Colors.white60,
                 height: 1.6,
               ),

@@ -26,7 +26,7 @@ class CicdSlide extends FlutterDeckSlideWidget {
                   RichText(
                     text: TextSpan(
                       style: const TextStyle(
-                        fontSize: 48,
+                        fontSize: 52,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -40,19 +40,19 @@ class CicdSlide extends FlutterDeckSlideWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   const Text(
                     'GitHub Actionsのワークフローが激変します。',
-                    style: TextStyle(fontSize: 20, color: Colors.white70),
+                    style: TextStyle(fontSize: 26, color: Colors.white70),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   _CheckItem('setup-ruby 不要', 'ステップ削減'),
                   _CheckItem('pod install 不要', 'ビルド時間短縮'),
                   _CheckItem('キャッシュ安定', 'Xcode標準のキャッシュ'),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 28),
                   const Text(
                     'Windowsメインの開発者でも、iOSビルドの\nパイプライン維持が圧倒的に低コストに。',
-                    style: TextStyle(fontSize: 18, color: Colors.white54, height: 1.5),
+                    style: TextStyle(fontSize: 24, color: Colors.white54, height: 1.6),
                   ),
                 ],
               ),
@@ -72,7 +72,7 @@ class CicdSlide extends FlutterDeckSlideWidget {
                     Center(
                       child: Icon(
                         Icons.check_circle_outline,
-                        size: 120,
+                        size: 140,
                         color: AppColors.blue,
                       ),
                     ),
@@ -95,25 +95,25 @@ class _CheckItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
-          const Text('✓', style: TextStyle(color: Color(0xFF4CAF50), fontSize: 24, fontWeight: FontWeight.bold)),
-          const SizedBox(width: 12),
+          const Text('✓', style: TextStyle(color: Color(0xFF4CAF50), fontSize: 28, fontWeight: FontWeight.bold)),
+          const SizedBox(width: 14),
           RichText(
             text: TextSpan(
               children: [
                 TextSpan(
                   text: '$title  ',
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
                 TextSpan(
                   text: subtitle,
-                  style: const TextStyle(fontSize: 20, color: Colors.white54),
+                  style: const TextStyle(fontSize: 24, color: Colors.white54),
                 ),
               ],
             ),

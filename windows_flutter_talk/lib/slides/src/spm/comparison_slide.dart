@@ -22,7 +22,7 @@ class ComparisonSlide extends FlutterDeckSlideWidget {
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
                 children: [
                   const TextSpan(
                     text: '依存関係管理の ',
@@ -75,9 +75,9 @@ class _TableHeader extends StatelessWidget {
       ),
       child: Row(
         children: const [
-          Expanded(flex: 2, child: Text('項目', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))),
-          Expanded(flex: 3, child: Text('CocoaPods (Legacy)', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))),
-          Expanded(flex: 3, child: Text('SwiftPM (3.44+)', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white))),
+          Expanded(flex: 2, child: Text('項目', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white))),
+          Expanded(flex: 3, child: Text('CocoaPods (Legacy)', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white))),
+          Expanded(flex: 3, child: Text('SwiftPM (3.44+)', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white))),
         ],
       ),
     );
@@ -95,21 +95,21 @@ class _TableRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
       color: isEven ? Colors.white.withValues(alpha: 0.03) : Colors.transparent,
       child: Row(
         children: [
           Expanded(
             flex: 2,
-            child: Text(label, style: const TextStyle(fontSize: 18, color: Colors.white70)),
+            child: Text(label, style: const TextStyle(fontSize: 26, color: Colors.white70)),
           ),
           Expanded(
             flex: 3,
-            child: Text(legacy, style: const TextStyle(fontSize: 18, color: Colors.white38)),
+            child: Text(legacy, style: const TextStyle(fontSize: 26, color: Colors.white38)),
           ),
           Expanded(
             flex: 3,
-            child: Text(spm, style: const TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.w500)),
+            child: Text(spm, style: const TextStyle(fontSize: 26, color: Colors.white70, fontWeight: FontWeight.w500)),
           ),
         ],
       ),

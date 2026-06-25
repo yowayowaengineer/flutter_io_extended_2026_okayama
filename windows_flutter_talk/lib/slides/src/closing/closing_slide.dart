@@ -69,7 +69,7 @@ class ClosingSlide extends FlutterDeckSlideWidget {
                       SizedBox(height: 4),
                       Text(
                         '液タブを接続しています...',
-                        style: TextStyle(fontSize: 18, color: Colors.white38),
+                        style: TextStyle(fontSize: 26, color: Colors.white38),
                       ),
                     ],
                   ),

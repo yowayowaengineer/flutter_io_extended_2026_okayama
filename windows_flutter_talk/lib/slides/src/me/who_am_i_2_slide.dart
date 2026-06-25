@@ -17,25 +17,24 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
       builder: (context) => Padding(
         padding: const EdgeInsets.fromLTRB(80, 32, 80, 32),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // 左: 会社ロゴ + 社名
-            SizedBox(
-              width: 320,
+            Expanded(
+              flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // ロゴ（画像を assets/images/people_software_logo.png に置いたら差し替え）
                   Container(
-                    width: 260,
-                    height: 120,
+                    width: 320,
+                    height: 200,
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.05),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.white24),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
                         'assets/images/people_software_logo.png',
                         fit: BoxFit.contain,
@@ -43,21 +42,21 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
                           child: Text(
                             'LOGO',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 28,
                               color: Colors.white24,
-                              letterSpacing: 4,
+                              letterSpacing: 6,
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 28),
                   const Text(
                     'ピープルソフトウェア\n株式会社',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       height: 1.5,
@@ -70,21 +69,20 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
             // 縦仕切り線
             Container(
               width: 1,
-              height: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
               color: Colors.white12,
             ),
 
             // 右: 役職 + ハイライト
             Expanded(
+              flex: 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 役職（取り消し線ネタ）
                   RichText(
                     text: TextSpan(
-                      style: const TextStyle(fontSize: 26, height: 1.6),
+                      style: const TextStyle(fontSize: 28, height: 1.6),
                       children: [
                         const TextSpan(
                           text: '部長',
@@ -106,7 +104,7 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
                   ),
                   RichText(
                     text: TextSpan(
-                      style: const TextStyle(fontSize: 20, height: 1.6),
+                      style: const TextStyle(fontSize: 26, height: 1.6),
                       children: [
                         const TextSpan(
                           text: '管理監督者',
@@ -123,19 +121,17 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32),
-
-                  // ハイライト
+                  const SizedBox(height: 48),
                   _Highlight(
                     icon: '🏆',
                     text: 'Flutterアプリコンテスト開催をきっかけにFlutterと出会う',
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 20),
                   _Highlight(
                     icon: '📱',
                     text: '大手有名企業のFlutterアプリ開発に携わる',
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 20),
                   _Highlight(
                     icon: '🥉',
                     text: 'FlutterKaigi スポンサー（ブロンズ）',
@@ -159,15 +155,15 @@ class _Highlight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(icon, style: const TextStyle(fontSize: 22)),
-        const SizedBox(width: 12),
+        Text(icon, style: const TextStyle(fontSize: 28)),
+        const SizedBox(width: 16),
         Expanded(
           child: Text(
             text,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 26,
               color: Colors.white70,
               height: 1.5,
             ),

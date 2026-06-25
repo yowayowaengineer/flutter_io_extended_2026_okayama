@@ -46,8 +46,8 @@ class _SummaryContentState extends State<_SummaryContent> {
                 children: [
                   // ── 45%: AI (大) ──────────────────────────────
                   _Section(
-                    headingSize: 19,
-                    bodySize: 13,
+                    headingSize: 34,
+                    bodySize: 22,
                     color: Colors.white,
                     heading: '🤖 1. AIと開発ワークフローの融合 (Agentic Workflows)',
                     body:
@@ -63,8 +63,8 @@ class _SummaryContentState extends State<_SummaryContent> {
 
                   // ── 20%: Decoupling (中) ──────────────────────
                   _Section(
-                    headingSize: 16,
-                    bodySize: 12,
+                    headingSize: 28,
+                    bodySize: 19,
                     color: Colors.white,
                     heading: '📱 2. コアフレームワークの大分離（The Great Decoupling）',
                     body:
@@ -78,8 +78,8 @@ class _SummaryContentState extends State<_SummaryContent> {
 
                   // ── 25%: Platform (小) ────────────────────────
                   _Section(
-                    headingSize: 14,
-                    bodySize: 11,
+                    headingSize: 23,
+                    bodySize: 16,
                     color: Colors.white,
                     heading: '🔧 3. プラットフォームとパフォーマンスの成熟',
                     body:
@@ -94,8 +94,8 @@ class _SummaryContentState extends State<_SummaryContent> {
 
                   // ── 10%: Desktop (極小・オチ) ─────────────────
                   _Section(
-                    headingSize: 12,
-                    bodySize: 10,
+                    headingSize: 19,
+                    bodySize: 14,
                     color: Colors.white,
                     heading: '🖥️ 4. デスクトップ & 組み込み（Embedded）の強化',
                     body:
@@ -250,7 +250,7 @@ class _StampBadge extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 26,
           fontWeight: FontWeight.bold,
           color: color,
           letterSpacing: 2,

@@ -26,7 +26,7 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
                   RichText(
                     text: TextSpan(
                       style: const TextStyle(
-                        fontSize: 48,
+                        fontSize: 52,
                         fontWeight: FontWeight.bold,
                       ),
                       children: [
@@ -41,12 +41,12 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 32),
                   const Text(
                     'Swift Package Manager (SPM) 移行の衝撃',
-                    style: TextStyle(fontSize: 22, color: Colors.white60),
+                    style: TextStyle(fontSize: 26, color: Colors.white60),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 36),
                   _Bullet('CocoaPodsからの悲願の脱却'),
                   _Bullet('Xcodeに統合されたネイティブ管理'),
                   _Bullet('Ruby環境のインストールが不要に'),
@@ -83,11 +83,11 @@ class _Bullet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          const Text('• ', style: TextStyle(color: Colors.white54, fontSize: 22)),
-          Text(text, style: const TextStyle(color: Colors.white70, fontSize: 22)),
+          const Text('• ', style: TextStyle(color: Colors.white54, fontSize: 28)),
+          Text(text, style: const TextStyle(color: Colors.white70, fontSize: 26)),
         ],
       ),
     );

@@ -39,10 +39,11 @@ class _ContentState extends State<_Content> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(80, 16, 80, 16),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // タイムライン
+            // タイムライン（左60%）
             Expanded(
+              flex: 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
@@ -57,14 +58,17 @@ class _ContentState extends State<_Content> {
                 ],
               ),
             ),
-            // オチ
-            const SizedBox(width: 32),
-            AnimatedScale(
-              scale: _punchlineVisible ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.elasticOut,
-              alignment: Alignment.center,
-              child: _Punchline(),
+            // オチ（右40%・全面）
+            const SizedBox(width: 48),
+            Expanded(
+              flex: 2,
+              child: AnimatedScale(
+                scale: _punchlineVisible ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.elasticOut,
+                alignment: Alignment.center,
+                child: const _Punchline(),
+              ),
             ),
           ],
         ),
@@ -106,16 +110,16 @@ class _Item extends StatelessWidget {
           child: Text(
             time,
             textAlign: TextAlign.right,
-            style: const TextStyle(fontSize: 13, color: Colors.white38),
+            style: const TextStyle(fontSize: 16, color: Colors.white38),
           ),
         ),
         const SizedBox(width: 12),
-        Text(icon, style: const TextStyle(fontSize: 18)),
+        Text(icon, style: const TextStyle(fontSize: 22)),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
             label,
-            style: TextStyle(fontSize: 15, color: _color, height: 1.5),
+            style: TextStyle(fontSize: 22, color: _color, height: 1.5),
           ),
         ),
       ],
@@ -124,39 +128,40 @@ class _Item extends StatelessWidget {
 }
 
 class _Punchline extends StatelessWidget {
+  const _Punchline();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 240,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 44),
       decoration: BoxDecoration(
         color: AppColors.blue.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: AppColors.blue.withValues(alpha: 0.4)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('😇', style: TextStyle(fontSize: 40)),
-          const SizedBox(height: 16),
+          const Text('😇', style: TextStyle(fontSize: 72)),
+          const SizedBox(height: 32),
           const Text(
             'Macユーザーに\n依頼して\nすぐリリース',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 36,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              height: 1.6,
+              height: 1.7,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 36),
           Text(
             'END',
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 22,
               color: AppColors.blue,
               fontWeight: FontWeight.bold,
-              letterSpacing: 2,
+              letterSpacing: 4,
             ),
           ),
         ],
