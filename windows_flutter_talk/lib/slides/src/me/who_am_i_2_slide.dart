@@ -14,37 +14,39 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
   @override
   FlutterDeckSlide build(BuildContext context) {
     return FlutterDeckSlide.blank(
-      builder: (context) => Padding(
-        padding: const EdgeInsets.fromLTRB(80, 32, 80, 32),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // 左: 会社ロゴ + 社名
-            Expanded(
+      builder: (context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(width: 160),
+          // 左: 会社ロゴ + 社名
+          Expanded(
               flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 320,
-                    height: 200,
+                    width: 500,
+                    height: 220,
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.05),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.white24),
+                      border: Border.all(color: Colors.grey.shade200),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        'assets/images/people_software_logo.png',
-                        fit: BoxFit.contain,
-                        errorBuilder: (_, _, _) => const Center(
-                          child: Text(
-                            'LOGO',
-                            style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.white24,
-                              letterSpacing: 6,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          'assets/images/people_software_logo.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (_, _, _) => const Center(
+                            child: Text(
+                              'LOGO',
+                              style: TextStyle(
+                                fontSize: 28,
+                                color: Colors.white24,
+                                letterSpacing: 6,
+                              ),
                             ),
                           ),
                         ),
@@ -139,9 +141,9 @@ class WhoAmI2Slide extends FlutterDeckSlideWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 160),
           ],
         ),
-      ),
     );
   }
 }

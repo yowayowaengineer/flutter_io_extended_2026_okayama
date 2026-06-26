@@ -54,21 +54,6 @@ class SpmDefaultSlide extends FlutterDeckSlideWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 60),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1A2332),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Center(
-                  child: Text(
-                    '// TODO: Xcodeスクリーンショット',
-                    style: TextStyle(color: Colors.white38, fontSize: 18),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),

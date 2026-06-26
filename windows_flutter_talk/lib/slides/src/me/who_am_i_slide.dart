@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_deck/flutter_deck.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class WhoAmISlide extends FlutterDeckSlideWidget {
@@ -118,20 +117,26 @@ class WhoAmISlide extends FlutterDeckSlideWidget {
     return FlutterDeckSlide.blank(
       builder: (context) => GestureDetector(
         onTap: showTutorial,
-        child: Stack(
-          children: [
-            Image.asset(
-              'assets/images/FlutterKaigi2025.webp',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            Positioned(
-              left: 967.w,
-              top: 528.h,
-              child: SizedBox(key: targetKey, width: 40.w, height: 40.h),
-            ),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) => Stack(
+            children: [
+              Image.asset(
+                'assets/images/FlutterKaigi2025.webp',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+              Positioned(
+                left: constraints.maxWidth * 0.52,
+                top: constraints.maxHeight * 0.68,
+                child: SizedBox(
+                  key: targetKey,
+                  width: constraints.maxWidth * (40 / 1920),
+                  height: constraints.maxHeight * (40 / 1080),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
