@@ -28,7 +28,7 @@ jobs:
         working-directory: windows_flutter_talk
         run: |
           flutter pub get
-          flutter build web --release --web-renderer canvaskit --base-href "/flutter_io_extended_2026_okayama/"
+          flutter build web --release --base-href "/flutter_io_extended_2026_okayama/"
 
       - uses: actions/upload-pages-artifact@v3
         with:
