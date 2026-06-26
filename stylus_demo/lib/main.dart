@@ -185,9 +185,7 @@ class _StylusCanvasState extends State<StylusCanvas>
         });
       } else {
         _linkTimer = Timer(const Duration(seconds: 10), () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (mounted) _openClearWindow();
-          });
+          if (mounted) _openClearWindow();
         });
       }
     }
