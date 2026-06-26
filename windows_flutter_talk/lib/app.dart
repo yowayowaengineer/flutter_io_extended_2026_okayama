@@ -144,78 +144,83 @@ class _AnimatedFooterWidgetState extends State<_AnimatedFooterWidget>
   @override
   Widget build(BuildContext context) {
     const imageSize = 50.0;
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final footerTop = screenHeight * 0.89;
-    const logoWidth = 100.0;
-    const logoPosition = logoWidth;
+    const logoPosition = 100.0;
     const rightMargin = 100.0;
-    final rightEndPosition = screenWidth - rightMargin;
-
     final bool started = _startTime != null;
 
-    double position;
-    String imagePath;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // flutter_deck の FHD スケール座標系から幅を取得。
+        // LayoutBuilder が無制限の場合（Row の非 flex 子など）は FHD 基準値にフォールバック。
+        final slideWidth = constraints.hasBoundedWidth
+            ? constraints.maxWidth
+            : 1920.0;
+        final rightEndPosition = slideWidth - rightMargin;
 
-    if (started) {
-      if (_t <= 0.5) {
-        final progress = _t * 2.0;
-        position =
-            rightEndPosition -
-            (rightEndPosition - logoPosition + imageSize) * progress;
-        imagePath = _imagePaths[0];
-      } else {
-        final progress = (_t - 0.5) * 2.0;
-        position =
-            logoPosition -
-            imageSize +
-            (rightEndPosition - logoPosition + imageSize) * progress;
-        imagePath = _imagePaths[1];
-      }
-    } else {
-      position = rightEndPosition;
-      imagePath = _idleImagePath;
-    }
+        double position;
+        String imagePath;
 
-    return UnconstrainedBox(
-      constrainedAxis: Axis.horizontal,
-      child: SizedBox(
-        width: 40,
-        height: 40,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Center(
-              child: Image.asset(
-                'assets/images/logo_512x512.png',
-                width: 40,
-                height: 40,
-                fit: BoxFit.contain,
-              ),
-            ),
-            Positioned(
-              left: position,
-              top: footerTop - (screenHeight * 0.9),
-              child: Image.asset(
-                imagePath,
-                width: imageSize,
-                height: imageSize,
-                fit: BoxFit.contain,
-                errorBuilder: (context, error, stackTrace) {
-                  return SizedBox(
+        if (started) {
+          if (_t <= 0.5) {
+            final progress = _t * 2.0;
+            position =
+                rightEndPosition -
+                (rightEndPosition - logoPosition + imageSize) * progress;
+            imagePath = _imagePaths[0];
+          } else {
+            final progress = (_t - 0.5) * 2.0;
+            position =
+                logoPosition -
+                imageSize +
+                (rightEndPosition - logoPosition + imageSize) * progress;
+            imagePath = _imagePaths[1];
+          }
+        } else {
+          position = rightEndPosition;
+          imagePath = _idleImagePath;
+        }
+
+        return UnconstrainedBox(
+          constrainedAxis: Axis.horizontal,
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Center(
+                  child: Image.asset(
+                    'assets/images/logo_512x512.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Positioned(
+                  left: position,
+                  top: -10,
+                  child: Image.asset(
+                    imagePath,
                     width: imageSize,
                     height: imageSize,
-                    child: Container(
-                      color: Colors.grey.withValues(alpha: 0.3),
-                      child: const Icon(Icons.image, size: 20),
-                    ),
-                  );
-                },
-              ),
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return SizedBox(
+                        width: imageSize,
+                        height: imageSize,
+                        child: Container(
+                          color: Colors.grey.withValues(alpha: 0.3),
+                          child: const Icon(Icons.image, size: 20),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
